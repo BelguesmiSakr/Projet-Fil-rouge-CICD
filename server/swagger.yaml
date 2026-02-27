@@ -1,0 +1,194 @@
+openapi: 3.0.3
+info:
+  title: My REST API
+  version: 1.0.0
+  description: API documentation for Contacts & Users
+servers:
+  - url: https://my-contacts-app-api.onrender.com
+  - url: http://localhost:5050
+
+paths:
+  /contact/add:
+    post:
+      summary: Add a new contact
+      tags: [Contact]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                  example: "John"
+                lastName:
+                  type: string
+                  example: "Doe"
+                phoneNumber:
+                  type: string
+                  example: "+21612345678"
+                user_id:
+                  type: string
+                  example: "68cd20492b384067fac2b0f7"
+      responses:
+        "200":
+          description: Contact created successfully
+        "500":
+          description: Server error
+
+  /contact/{id}:
+    get:
+      summary: Get all contacts for a user
+      tags: [Contact]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of contacts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        "500":
+          description: Server error
+
+    delete:
+      summary: Delete a contact
+      tags: [Contact]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Contact deleted successfully
+        "500":
+          description: Server error
+
+    put:
+      summary: Update a contact (replace all fields)
+      tags: [Contact]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                  example: "John (new name)"
+                lastName:
+                  type: string
+                  example: "Doe"
+                phoneNumber:
+                  type: string
+                  example: "+21612345678"
+                user_id:
+                  type: string
+                  example: "68cd20492b384067fac2b0f7"
+      responses:
+        "200":
+          description: Contact updated successfully
+        "404":
+          description: Contact not found
+        "500":
+          description: Server error
+
+    patch:
+      summary: Update specific fields of a contact
+      tags: [Contact]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                phoneNumber: "+21611223344"
+      responses:
+        "200":
+          description: Contact updated successfully
+        "404":
+          description: Contact not found
+        "500":
+          description: Server error
+
+  /user/register:
+    post:
+      summary: Register a new user
+      tags: [User]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userName:
+                  type: string
+                  example: "user123"
+                email:
+                  type: string
+                  example: "user@example.com"
+                password:
+                  type: string
+                  example: "mypassword123"
+      responses:
+        "200":
+          description: User created successfully
+        "500":
+          description: Server error
+
+  /user/login:
+    post:
+      summary: Login user
+      tags: [User]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "user@example.com"
+                password:
+                  type: string
+                  example: "mypassword123"
+      responses:
+        "200":
+          description: Login successful (returns JWT)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        "401":
+          description: Unauthorized – invalid credentials
+        "500":
+          description: Server error
