@@ -26,3 +26,29 @@ It handles user authentication and contact management using MongoDB as a databas
 - Swagger (https://my-contacts-app-api.onrender.comapi-docs/)
 
 ---
+
+## Environment Variables
+
+Create a `.env` file in the `server` folder with the following values:
+
+```
+PORT=5050
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET_KEY=your_jwt_secret
+```
+
+---
+
+## Testing
+
+The server tests use an in-memory MongoDB instance, so they do not touch your
+real database.
+
+Run tests from the `server` folder:
+
+```
+npm install
+npm test
+```
+
+---
