@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    environment {
+        // Indique aux outils de test qu'ils s'exécutent dans un environnement d'intégration continue
+        CI = 'true'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Récupération du code source depuis Git
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('server') {
+                    echo 'Installation des dépendances backend...'
+                    bat 'npm install'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                dir('server') {
+                    echo 'Exécution des tests backend (Jest)...'
+                    bat 'npm test'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Exécution de la pipeline du backend terminée.'
+        }
+        success {
+            echo 'Backend : Installation et tests réussis !'
+        }
+        failure {
+            echo 'Échec de la pipeline du backend.'
+        }
+    }
+}
