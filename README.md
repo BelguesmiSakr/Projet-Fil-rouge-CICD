@@ -7,3 +7,13 @@ This repository contains a contact management application.
 - Database: The API consumes a MongoDB cluster.
 
 This project is intended to demonstrate a full-stack setup where the React UI interacts with a Node.js API backed by MongoDB.
+
+## Tests
+
+Des tests unitaires documentés sont disponibles pour la partie client.
+Pour les exécuter :
+
+```bash
+cd client
+npm test
+```

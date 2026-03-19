@@ -26,6 +26,9 @@ async function teardownTestDB() {
   }
 }
 
+// Ajout d'un test ignoré pour éviter que Jest ne plante en cherchant un test dans ce fichier
+test.skip("Fichier utilitaire pour la base de données", () => {});
+
 module.exports = {
   setupTestDB,
   clearDatabase,

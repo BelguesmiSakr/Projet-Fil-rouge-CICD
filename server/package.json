@@ -26,7 +26,7 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
-    "mongodb-memory-server": "^10.2.0",
-    "supertest": "^7.1.4"
+    "mongodb-memory-server": "^10.4.3",
+    "supertest": "^7.2.2"
   }
 }
