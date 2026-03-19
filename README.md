@@ -1,18 +1,35 @@
-# Contact Manager
+# Projet Fil Rouge - CI/CD (Contact Manager)
 
-This repository contains a contact management application.
+Ce dépôt contient une application de gestion de contacts (MyContacts) complète avec une pipeline CI/CD automatisée.
 
-- Client: React (client-side) application for managing contacts.
-- API: Node.js service consumed by the client.
-- Database: The API consumes a MongoDB cluster.
+- **Client** : Application Frontend (React, Vite, TailwindCSS).
+- **API** : Backend (Node.js, Express) consommé par le client.
+- **Base de données** : Cluster MongoDB (Atlas).
+- **CI/CD** : Pipelines automatisées avec Jenkins.
 
-This project is intended to demonstrate a full-stack setup where the React UI interacts with a Node.js API backed by MongoDB.
+## 🚀 Démarrage local
 
-## Tests
+### 1. Backend (Serveur)
+Placez-vous dans le dossier `/server` et créez un fichier `.env` avec vos variables (ex: `MONGO_URI`, `PORT=5050`, `JWT_SECRET_KEY`).
+```bash
+cd server
+npm install
+npm run dev
+```
 
-Des tests unitaires documentés sont disponibles pour la partie client.
-Pour les exécuter :
+### 2. Frontend (Client)
+Dans un nouveau terminal, placez-vous dans le dossier `/client`.
+```bash
+cd client
+npm install
+npm run dev
+```
 
+## 🧪 Tests
+
+Des tests unitaires et d'intégration documentés sont disponibles pour les deux parties du projet.
+
+**Tests Frontend (Vitest) :**
 ```bash
 cd client
 npm test
