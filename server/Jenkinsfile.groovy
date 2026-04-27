@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'NodeJS'
+    }
+
     environment {
         // Nom de l'image Docker pour le backend
         DOCKER_IMAGE = 'amani1998/mycontacts-backend'

@@ -1,0 +1,18 @@
+services:
+  backend:
+    image: amani1998/mycontacts-backend:latest
+    container_name: mycontacts-backend
+    ports:
+      - "5050:5050"
+    env_file:
+      - ./server/.env
+    restart: unless-stopped
+
+  frontend:
+    image: amani1998/mycontacts-frontend:latest
+    container_name: mycontacts-frontend
+    ports:
+      - "8081:80"
+    depends_on:
+      - backend
+    restart: unless-stopped

@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'NodeJS'
+    }
+
     environment {
         // Nom de l'image Docker avec votre compte Docker Hub
         DOCKER_IMAGE = 'amani1998/mycontacts-frontend'
