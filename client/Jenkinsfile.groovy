@@ -30,6 +30,23 @@ pipeline {
             }
         }
         
+        stage('Code Quality (SonarQube)') {
+            steps {
+                dir('client') {
+                    echo 'Analyse du code avec SonarQube...'
+                    withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
+                        sh """
+                        npx sonar-scanner \
+                          -Dsonar.projectKey=mycontacts-frontend \
+                          -Dsonar.sources=src \
+                          -Dsonar.host.url=http://sonarqube:9000 \
+                          -Dsonar.token=\$SONAR_TOKEN
+                        """
+                    }
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 dir('client') {

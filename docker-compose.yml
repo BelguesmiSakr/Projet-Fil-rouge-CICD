@@ -12,7 +12,36 @@ services:
     image: amani1998/mycontacts-frontend:latest
     container_name: mycontacts-frontend
     ports:
-      - "8081:80"
+      - "8082:80"
     depends_on:
       - backend
     restart: unless-stopped
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    user: root # Nécessaire pour avoir les droits sur le socket Docker
+    ports:
+      - "8083:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock # Permet d'utiliser Docker à l'intérieur de Jenkins
+    restart: unless-stopped
+
+  sonarqube:
+    image: sonarqube:lts-community
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_logs:/opt/sonarqube/logs
+      - sonarqube_extensions:/opt/sonarqube/extensions
+    restart: unless-stopped
+
+volumes:
+  jenkins_data:
+  sonarqube_data:
+  sonarqube_logs:
+  sonarqube_extensions:
